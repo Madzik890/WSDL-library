@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="f2" displayName="Client" projectFiles="true">
+      <itemPath>src/client.cpp</itemPath>
+      <itemPath>src/client.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f3" displayName="Cryptography" projectFiles="true">
+      <itemPath>src/Crypto/base64.cpp</itemPath>
+      <itemPath>src/Crypto/base64.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f5" displayName="Errors" projectFiles="true">
+      <itemPath>src/Errors.cpp</itemPath>
+      <itemPath>src/Errors.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>src/Definitions.hpp</itemPath>
+      <itemPath>src/namespaces.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f1" displayName="HTTP" projectFiles="true">
+      <itemPath>src/HTTP/HTTP.cpp</itemPath>
+      <itemPath>src/HTTP/HTTP.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f4" displayName="Message" projectFiles="true">
+      <logicalFolder name="f1" displayName="Request" projectFiles="true">
+        <itemPath>src/Request.cpp</itemPath>
+        <itemPath>src/Request.hpp</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="Response" projectFiles="true">
+        <itemPath>src/Response.cpp</itemPath>
+        <itemPath>src/Response.hpp</itemPath>
+      </logicalFolder>
+      <itemPath>src/Message.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="f6" displayName="pugixml" projectFiles="true">
+      <itemPath>src/pugixml/foreach.hpp</itemPath>
+      <itemPath>src/pugixml/pugiconfig.hpp</itemPath>
+      <itemPath>src/pugixml/pugixml.cpp</itemPath>
+      <itemPath>src/pugixml/pugixml.hpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>main.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+      <logicalFolder name="f1"
+                     displayName="Base64Test"
+                     projectFiles="true"
+                     kind="TEST">
+        <itemPath>tests/Base64Test.cpp</itemPath>
+      </logicalFolder>
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="3">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <standard>3</standard>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <standard>4</standard>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <archiverTool>
+        </archiverTool>
+      </compileType>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerAddLib>
+            <pElem>lib</pElem>
+          </linkerAddLib>
+          <commandLine>-lcrypto -lssl</commandLine>
+        </linkerTool>
+      </folder>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Errors.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Errors.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/HTTP/HTTP.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Message.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Request.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Request.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Response.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Response.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/client.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/client.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/namespaces.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/foreach.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugiconfig.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugixml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugixml.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/Base64Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="3">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <standard>3</standard>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <standard>4</standard>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <archiverTool>
+        </archiverTool>
+      </compileType>
+      <folder path="TestFiles/f1">
+        <cTool>
+          <incDir>
+            <pElem>.</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <incDir>
+            <pElem>include</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <output>${TESTDIR}/TestFiles/f1</output>
+          <linkerAddLib>
+            <pElem>lib</pElem>
+          </linkerAddLib>
+          <commandLine>-lcrypto -lssl</commandLine>
+        </linkerTool>
+      </folder>
+      <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Errors.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Errors.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/HTTP/HTTP.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Message.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Request.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Request.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/Response.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/Response.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/client.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/client.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/namespaces.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/foreach.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugiconfig.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugixml.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="src/pugixml/pugixml.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="tests/Base64Test.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
