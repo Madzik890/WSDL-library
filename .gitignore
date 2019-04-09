@@ -31,7 +31,11 @@
 *.out
 *.app
 
+# Folders contain builded library and objects files
 build/
 dist/
 
+# Files use by terminal
 main.cpp
+.directory
+.dep.inc
