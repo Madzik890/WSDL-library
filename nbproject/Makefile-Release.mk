@@ -35,9 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/src/Crypto/base64.o \
-	${OBJECTDIR}/src/Errors.o \
 	${OBJECTDIR}/src/HTTP/HTTP.o \
 	${OBJECTDIR}/src/Request.o \
 	${OBJECTDIR}/src/Response.o \
@@ -69,32 +67,22 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-Llib
+LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl.a
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl.a: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl.a
-	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl.a ${OBJECTFILES} 
-	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl.a
-
-${OBJECTDIR}/main.o: main.cpp
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a
+	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a ${OBJECTFILES} 
+	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a
 
 ${OBJECTDIR}/src/Crypto/base64.o: src/Crypto/base64.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/Crypto
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Crypto/base64.o src/Crypto/base64.cpp
-
-${OBJECTDIR}/src/Errors.o: src/Errors.cpp
-	${MKDIR} -p ${OBJECTDIR}/src
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Errors.o src/Errors.cpp
 
 ${OBJECTDIR}/src/HTTP/HTTP.o: src/HTTP/HTTP.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/HTTP
@@ -139,19 +127,6 @@ ${TESTDIR}/tests/Base64Test.o: tests/Base64Test.cpp
 	$(COMPILE.cc) -O2 -Iinclude -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Base64Test.o tests/Base64Test.cpp
 
 
-${OBJECTDIR}/main_nomain.o: ${OBJECTDIR}/main.o main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/main.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_nomain.o main.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/main.o ${OBJECTDIR}/main_nomain.o;\
-	fi
-
 ${OBJECTDIR}/src/Crypto/base64_nomain.o: ${OBJECTDIR}/src/Crypto/base64.o src/Crypto/base64.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/Crypto
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/Crypto/base64.o`; \
@@ -163,19 +138,6 @@ ${OBJECTDIR}/src/Crypto/base64_nomain.o: ${OBJECTDIR}/src/Crypto/base64.o src/Cr
 	    $(COMPILE.cc) -O2 -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Crypto/base64_nomain.o src/Crypto/base64.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/Crypto/base64.o ${OBJECTDIR}/src/Crypto/base64_nomain.o;\
-	fi
-
-${OBJECTDIR}/src/Errors_nomain.o: ${OBJECTDIR}/src/Errors.o src/Errors.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/Errors.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -O2 -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Errors_nomain.o src/Errors.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/src/Errors.o ${OBJECTDIR}/src/Errors_nomain.o;\
 	fi
 
 ${OBJECTDIR}/src/HTTP/HTTP_nomain.o: ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.cpp 

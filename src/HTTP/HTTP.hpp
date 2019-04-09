@@ -1,5 +1,9 @@
 /*
- * HTTP Header
+ * Create HTTP header.
+ * 
+ * In future, I am going to change strings to chars*, 
+ * because, each string allocate minimum 24 bytes, which would 
+ * give a problem with memory, while using a lot of connections.
  */
 
 #ifndef HTTP_HPP

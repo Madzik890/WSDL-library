@@ -33,9 +33,7 @@ namespace WSDL
     private:
         struct sockaddr_in m_service;
         int m_socket;
-        
-        bool entireWebsidedLoaded( const char * websitePart );
-
+       
     public:
         client();
         ~client();

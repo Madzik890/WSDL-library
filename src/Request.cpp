@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * SOAP Request
  */
 
 #include "Request.hpp"
@@ -10,7 +8,9 @@
 using namespace WSDL;
 
 /*
+ * Return the request body.
  * 
+ * @return Body of Request.
  */        
 const std::string Request::getBody()
 { 
@@ -21,7 +21,11 @@ const std::string Request::getBody()
 
 
 /*
+ * Start work with XML, setting version and encoding of the XML file.
  * 
+ * @param version   XML version
+ * 
+ * @param encoding  XML encoding
  */
 void Request::startXML(const char *version, const char *encoding)
 {
@@ -33,7 +37,11 @@ void Request::startXML(const char *version, const char *encoding)
 
 
 /*
+ * Add namespaces to request, if service requires it.
  * 
+ * @parma envelopeTag   the envelope tag
+ * 
+ * @param namespaces    the array with namespaces
  */
 void Request::createNamespace(const char *envelopeTag, namespaces namespaces[])
 {
@@ -48,7 +56,13 @@ void Request::createNamespace(const char *envelopeTag, namespaces namespaces[])
 
 
 /*
+ * Create body of request.
  * 
+ * @param bodyTag       the body tag
+ * 
+ * @param encodingTag   the encoding tag    
+ * 
+ * @param encodingType  the encoding type
  */
 void Request::createBody(const char *bodyTag, const char *encodingTag, const char *encodingType)
 {
@@ -59,7 +73,9 @@ void Request::createBody(const char *bodyTag, const char *encodingTag, const cha
 
 
 /*
- *
+ * Create request.
+ * 
+ * @param request   the request tag 
  */
 void Request::createRequest(const char *request)
 {
@@ -68,7 +84,12 @@ void Request::createRequest(const char *request)
 
 
 /*
- *
+ *  Add a parameter to the request.
+ *  This function is adjusted to works with differents type of variable.
+ * 
+ * @param param     the parameter in XML request, which has a arguments
+ * 
+ * @param argc      the argument connected with the parameter
  */
 template<class Argc>
 void Request::addRequestParam(const char* param, const Argc argc)
@@ -80,13 +101,13 @@ void Request::addRequestParam(const char* param, const Argc argc)
 }
 
 
-template void Request::addRequestParam<size_t>(const char*,size_t); // instantiates addRequestParam<int>(int)
+template void Request::addRequestParam<size_t>(const char*,size_t); // instantiates addRequestParam<size_t>(size_t)
 template void Request::addRequestParam<int>(const char*,int); // instantiates addRequestParam<int>(int)
-template void Request::addRequestParam<double>(const char*,double); // instantiates addRequestParam<int>(int)
-template void Request::addRequestParam<float>(const char*,float); // instantiates addRequestParam<int>(int)
-template void Request::addRequestParam<char>(const char*,char); // instantiates addRequestParam<int>(int)
-template void Request::addRequestParam<char*>(const char*,char*); // instantiates addRequestParam<int>(int)
-template void Request::addRequestParam<const char*>(const char*, const char*); // instantiates addRequestParam<int>(int)
+template void Request::addRequestParam<double>(const char*,double); // instantiates addRequestParam<double>(double)
+template void Request::addRequestParam<float>(const char*,float); // instantiates addRequestParam<float>(float)
+template void Request::addRequestParam<char>(const char*,char); // instantiates addRequestParam<char>(char)
+template void Request::addRequestParam<char*>(const char*,char*); // instantiates addRequestParam<char*>(char*)
+template void Request::addRequestParam<const char*>(const char*, const char*); // instantiates addRequestParam<const char*>(const char*)
 
 
 

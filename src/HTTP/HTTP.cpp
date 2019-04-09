@@ -1,5 +1,9 @@
 /*
- * Create http's headers.
+ * Create HTTP header.
+ * 
+ * In future, I am going to change strings to chars*, 
+ * because, each string allocate minimum 24 bytes, which would 
+ * give a problem with memory, while using a lot of connections.
  */
 
 #include "HTTP.hpp"
@@ -25,7 +29,7 @@ using namespace WSDL;
 #define DEFAULT_HTTP_CODE 200
 
 /*
- * 
+ * Default constructor 
  */
 HTTP::HTTP()
 :s_buffer(std::string()), s_userAgent(DEFAULT_USER_AGENT),i_httpCode(DEFAULT_HTTP_CODE), p_recBuffer(NULL),
@@ -35,7 +39,9 @@ HTTP::HTTP()
 
 
 /*
- *
+ * Constructor is used by "client" class, while receiving data from a server.@
+ * 
+ * @param httpHeader            the pointer, to data received from a server
  */
 HTTP::HTTP(std::string *httpHeader)
 :s_buffer(), s_userAgent(DEFAULT_USER_AGENT), p_recBuffer(httpHeader)
@@ -45,7 +51,9 @@ HTTP::HTTP(std::string *httpHeader)
 
 
 /*
+ * Default destructor.
  * 
+ * In the future, there may be something.
  */
 HTTP::~HTTP()
 {
@@ -53,7 +61,13 @@ HTTP::~HTTP()
  
 
 /*
- *
+ *  Set major parameters of HTTP connections(HTTP method, version and optionaly location resource).
+ * 
+ * @param method            the method of connection(default POST)
+ * 
+ * @param version           the version of connection, now supported is only 1.1 and 1.2
+ * 
+ * @param methodLocation    the location of requested resource, but this is default. You can use it.
  */
 void HTTP::setMethod(const enum httpMethod method, const enum httpVersion version, const std::string methodLocation)
 {

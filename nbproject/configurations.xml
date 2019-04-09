@@ -9,10 +9,6 @@
       <itemPath>src/Crypto/base64.cpp</itemPath>
       <itemPath>src/Crypto/base64.hpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f5" displayName="Errors" projectFiles="true">
-      <itemPath>src/Errors.cpp</itemPath>
-      <itemPath>src/Errors.hpp</itemPath>
-    </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
@@ -39,11 +35,6 @@
       <itemPath>src/pugixml/pugiconfig.hpp</itemPath>
       <itemPath>src/pugixml/pugixml.cpp</itemPath>
       <itemPath>src/pugixml/pugixml.hpp</itemPath>
-    </logicalFolder>
-    <logicalFolder name="SourceFiles"
-                   displayName="Source Files"
-                   projectFiles="true">
-      <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -106,17 +97,11 @@
           <commandLine>-lcrypto -lssl</commandLine>
         </linkerTool>
       </folder>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Errors.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Errors.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -198,17 +183,11 @@
           <commandLine>-lcrypto -lssl</commandLine>
         </linkerTool>
       </folder>
-      <item path="main.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/Errors.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Errors.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
       </item>

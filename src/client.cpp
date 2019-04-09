@@ -19,18 +19,6 @@ using namespace WSDL;
 
 
 /*
- * 
- */
-std::string getIpByName(const char *host) 
-{
-    hostent* hostname = gethostbyname(host);
-    if(hostname)
-        return std::string(inet_ntoa(**(in_addr**)hostname->h_addr_list));
-    return std::string();
-}
-
-
-/*
  * Default constructor
  */
 client::client()
@@ -38,8 +26,13 @@ client::client()
 }
 
 
+/*
+ * Default destructor, always trying to close socket,
+ * to not left a blocked port.
+ */
 client::~client()
 {
+    shutdown( m_socket, SHUT_RDWR );
 }
     
 
@@ -61,7 +54,8 @@ void client::setIP(std::string ip)
  */
 void client::setIPbyDNS(std::string ip)
 {
-    this->endpoint = getIpByName(ip.c_str());
+    //this->endpoint = getIpByName(ip.c_str());
+    this->endpoint = ip;
 
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
@@ -87,7 +81,8 @@ void client::setIP(std::string ip, unsigned int port)
  */
 void client::setIPbyDNS(std::string ip, unsigned int port)
 {
-    this->endpoint = getIpByName(ip.c_str());
+    //this->endpoint = getIpByName(ip.c_str());
+    this->endpoint = ip;
 
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
@@ -96,6 +91,7 @@ void client::setIPbyDNS(std::string ip, unsigned int port)
 
 
 /*
+ * Try enable KeepAlive connection with a server.
  * 
  * @return State of setting KeepAlive operation(true - OK, fail - error)
  */
@@ -110,6 +106,7 @@ bool client::setKeepAliveConnection()
 
 
 /*
+ * Try enable KeepIdle connection with a server.
  * 
  * @return State of setting KeepIdle operation(true - OK, fail - error)
  */
@@ -124,7 +121,9 @@ bool client::setKeepIdleConnection()
   
 
 /*
- *
+ *  Try enable, and reserve socket to selected IP, and port.
+ *  If socket would be enabled, return true, else false.
+ * 
  *  @return State of whole operation
  */
 int client::init()
@@ -140,7 +139,16 @@ int client::init()
 
 
 /*
- * Copy
+ * Copy one string to other. 
+ * 
+ * This function has been created, because "valgrind" said that, 
+ * Function "strcat" was not safely in memory operations.
+ * 
+ * @param string            the string, where will be allocated copy
+ * 
+ * @param copy              the string, which will be copyied to first argc
+ * 
+ * @param size              the first size of "copy" string   
  */
 void copyString(char * string, const char * copy, size_t size)
 {

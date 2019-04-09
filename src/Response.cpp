@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 #include "Response.hpp"
 #include <cstdio>
 #include <sstream>
@@ -13,7 +7,7 @@ using namespace WSDL;
 
 
 /*
- * 
+ * Default constructor.
  */
 Response::Response()
 :p_body(NULL), m_xml(NULL)
@@ -22,7 +16,9 @@ Response::Response()
 
 
 /*
+ * Constructor using, while "client" class receives data.
  * 
+ * @param s_body    the pointer to server response, without HTTP header
  */
 Response::Response(std::string *s_body)
 :p_body(s_body), m_xml(NULL)
@@ -33,7 +29,10 @@ Response::Response(std::string *s_body)
 
 
 /*
+ * Return body of response.
+ * This functions is hereditary from the main class.
  * 
+ * @return Body of response.
  */
 const std::string Response::getBody()
 {
@@ -44,7 +43,7 @@ const std::string Response::getBody()
 
 
 /*
- * 
+ * Add node, by which You will able to search a value.
  */
 void Response::addNode(const char *nodeName)
 { 
@@ -69,7 +68,7 @@ void Response::addNode(const char *nodeName)
 
 
 /*
- * 
+ * Return the last value, from the last created node.
  */
 const char *Response::getLastNodeValue(const char *nodeName)
 {
@@ -81,7 +80,7 @@ const char *Response::getLastNodeValue(const char *nodeName)
 
 
 /*
- * 
+ * Clear the xml body.
  */
 void Response::clearResponse()
 {  

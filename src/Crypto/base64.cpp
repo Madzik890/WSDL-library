@@ -7,6 +7,13 @@
 #include <openssl/pem.h>
 
 
+/*
+ *  Encoding data to BASE64 format.
+ * 
+ * @param input         the string, block of data
+ * 
+ * @param output        the output string pointer
+ */
 void base64Encode(const std::string input, std::string *output)
 { 
     BUF_MEM *mem_bio_mem_ptr;    //Pointer to a "memory BIO" structure holding our base64 data.
@@ -31,6 +38,13 @@ void base64Encode(const std::string input, std::string *output)
 }
 
 
+/*
+ *  Decode data in BASE64 format to normal.
+ * 
+ * @param input         the string, block of data
+ * 
+ * @param output        the output string pointer
+ */
 void base64Decode(const std::string input, std::string *output)
 {
   BIO *b64_bio, *mem_bio;      //Declares two OpenSSL BIOs: a base64 filter and a memory BIO.

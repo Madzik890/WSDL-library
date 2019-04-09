@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux
-CND_ARTIFACT_NAME_Debug=libwsdl.a
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libwsdl.a
+CND_ARTIFACT_NAME_Debug=libwsdl-library.a
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux/libwsdl-library.a
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux/package
-CND_PACKAGE_NAME_Debug=WSDL.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/WSDL.tar
+CND_PACKAGE_NAME_Debug=WSDL-library.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux/package/WSDL-library.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux
-CND_ARTIFACT_NAME_Release=libwsdl.a
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libwsdl.a
+CND_ARTIFACT_NAME_Release=libwsdl-library.a
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux/libwsdl-library.a
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux/package
-CND_PACKAGE_NAME_Release=WSDL.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/WSDL.tar
+CND_PACKAGE_NAME_Release=WSDL-library.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux/package/WSDL-library.tar
 #
 # include compiler specific variables
 #

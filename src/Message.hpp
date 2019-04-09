@@ -18,10 +18,14 @@
 
 namespace WSDL
 {
+    /*
+     *  Mainly class, used to inheritance. 
+     * "Request" and "Responde" classes using this class.
+     */
     class Message
     {
     public:
-        virtual const std::string getBody() = 0;
+        virtual const std::string getBody() = 0;    //pure class
     };
         
 }
