@@ -31,7 +31,7 @@ using namespace WSDL;
  */
 HTTP::HTTP()
 :s_buffer(std::string()), s_userAgent(DEFAULT_USER_AGENT),i_httpCode(DEFAULT_HTTP_CODE), p_recBuffer(NULL),
-        e_encoding(length)
+        e_encoding(length), e_connection(close)
 {
 }
 
@@ -42,7 +42,7 @@ HTTP::HTTP()
  * @param httpHeader            the pointer, to data received from a server
  */
 HTTP::HTTP(std::string *httpHeader)
-:s_buffer(), s_userAgent(DEFAULT_USER_AGENT), p_recBuffer(httpHeader)
+:s_buffer(), s_userAgent(DEFAULT_USER_AGENT), p_recBuffer(httpHeader), e_connection(close)
 {
     analizeHeader();
 }
@@ -113,6 +113,15 @@ void HTTP::addContentType(const std::string content)
 
 
 /*
+ * 
+ */
+void HTTP::setConnectionType(httpConnectionType type)
+{
+    this->e_connection = type;
+}
+
+
+/*
  * Create HTTP header.
  */
 const std::string HTTP::getBody()
@@ -125,14 +134,14 @@ const std::string HTTP::getBody()
     s_header += this->getContentTypeString();
     if(this->e_encoding == length)
         s_header += this->getContentLengthString();
-    s_header += this->getConnectionStatusString();
+    s_header += this->getConnectionTypeString();
     s_header += this->getSOAPActionString();
     
-    if(!m_addonVector.empty())
+    /*if(!m_addonVector.empty())
     {
         for(int i = 0; i < m_addonVector.size(); i++)
             s_header += (*m_addonVector[i]);
-    }
+    }*/
     
     
     s_header += "\n";
@@ -164,6 +173,15 @@ const enum httpMethod HTTP::getMethod()
 const enum httpVersion HTTP::getVersion()
 {
     return this->e_version;
+}
+
+
+/*
+ * 
+ */
+const enum httpConnectionType HTTP::getConnectionType()
+{
+    return this->e_connection;
 }
 
 
@@ -216,10 +234,10 @@ const std::string HTTP::getHttpMessage()
  * 
  * @param param     parameter is pointer to a std::string object
  */
-void HTTP::addHttpParam(httpParam *param)
-{
-    m_addonVector.push_back(param);
-}
+//void HTTP::addHttpParam(httpParam *param)
+//{
+//    m_addonVector.push_back(param);
+//}
 
 
 //////////////////////////////////////
@@ -306,6 +324,7 @@ const std::string HTTP::getUserAgentString()
     return s_result;
 }
 
+
 const std::string HTTP::getContentLengthString()
 {
     std::string s_result;
@@ -320,10 +339,26 @@ const std::string HTTP::getContentLengthString()
 }
 
 
-const std::string HTTP::getConnectionStatusString()
+const std::string HTTP::getConnectionTypeString()
 {
-    return "Connection: close \n";
+    std::string s_result;
+    s_result = "Connection: ";
+    
+    switch(e_connection)
+    {
+        case close:
+            s_result += "close";
+            break;
+        
+        case keep_alive:
+            s_result += "keep-alive";
+            break;
+    }
+    
+    s_result += "\n";
+    return s_result;
 }
+
 
 const std::string HTTP::getBasicAuth()
 {

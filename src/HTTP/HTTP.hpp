@@ -32,9 +32,11 @@ enum httpDataEncoding
 
 enum httpConnectionType
 {
+    close,
+    keep_alive
 };
 
-typedef std::string httpParam;
+typedef char* httpParam;
 
 namespace WSDL
 {
@@ -47,7 +49,7 @@ namespace WSDL
     {
     private:
         const char *s_userAgent;
-        std::vector<httpParam*>m_addonVector;
+        //std::vector<httpParam*>m_addonVector;
         
     public:
         HTTP();
@@ -59,6 +61,7 @@ namespace WSDL
         void setLengthOfRequest(const unsigned int length);
         void setSOAPAction(const std::string action);
         void addContentType(const std::string);
+        void setConnectionType(httpConnectionType type);
         
         virtual const std::string getBody();//returns finished header
         
@@ -66,6 +69,7 @@ namespace WSDL
         const enum httpMethod getMethod();
         const enum httpVersion getVersion();
         const enum httpDataEncoding getEncodingType();
+        const enum httpConnectionType getConnectionType();
         const std::string getIP();
         const std::string getContentType();
         const std::string getBuffer();
@@ -73,7 +77,7 @@ namespace WSDL
         const int getHttpCode();
         const std::string getHttpMessage();
        
-        void addHttpParam(httpParam *param);
+        //void addHttpParam(httpParam *param);
     protected:
         void removeAddons();//removes 
         void analizeHeader();
@@ -86,7 +90,7 @@ namespace WSDL
         const std::string getServerName();
         const std::string getUserAgentString();
         const std::string getContentLengthString();
-        const std::string getConnectionStatusString();
+        const std::string getConnectionTypeString();
         const std::string getBasicAuth();
         const std::string getSOAPActionString();
         
@@ -100,6 +104,7 @@ namespace WSDL
         enum httpMethod e_method;
         enum httpVersion e_version;
         enum httpDataEncoding e_encoding;
+        enum httpConnectionType e_connection;
         std::string e_methodLocation;
         
         std::string s_IP;

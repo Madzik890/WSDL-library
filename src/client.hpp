@@ -34,7 +34,6 @@ namespace WSDL
         struct sockaddr_in m_service;
         struct timeval tv_sendTime;
         struct timeval tv_recvTime;
-        struct hostent * m_hostEnt;
 
         int m_socket;
        
@@ -43,9 +42,9 @@ namespace WSDL
         ~client();
         
         void setIP(const char *ip);
-        bool setIPbyDNS(const char *ip);
+        void setIPbyDNS(const char *ip);
         void setIP(const char *ip, const unsigned int port);
-        bool setIPbyDNS(const char *ip, unsigned int port);
+        void setIPbyDNS(const char *ip, const unsigned int port);
         
         bool setKeepAliveConnection();
         bool setKeepIdleConnection();
@@ -56,7 +55,11 @@ namespace WSDL
         virtual int init();
         virtual int sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponde, Response *response);
         
-        virtual int * getSocket();    
+        virtual int * getSocket();
+    protected:
+        std::string endpoint;
+        
+        const char * getIpByName( const char * hostName );
     };
 
 }
