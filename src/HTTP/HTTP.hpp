@@ -10,7 +10,7 @@
 #define HTTP_HPP
 
 #include <string>
-#include <list>
+#include <vector>
 
 enum httpVersion
 {
@@ -47,7 +47,7 @@ namespace WSDL
     {
     private:
         const char *s_userAgent;
-        std::list<httpParam>m_addonList;
+        std::vector<httpParam*>m_addonVector;
         
     public:
         HTTP();
@@ -73,7 +73,7 @@ namespace WSDL
         const int getHttpCode();
         const std::string getHttpMessage();
        
-        
+        void addHttpParam(httpParam *param);
     protected:
         void removeAddons();//removes 
         void analizeHeader();

@@ -59,7 +59,7 @@ HTTP::~HTTP()
  
 
 /*
- *  Set major parameters of HTTP connections(HTTP method, version and optionaly location resource).
+ * Set major parameters of HTTP connections(HTTP method, version and optionaly location resource).
  * 
  * @param method            the method of connection(default POST)
  * 
@@ -111,8 +111,9 @@ void HTTP::addContentType(const std::string content)
     this->s_contentType += content;
 }
 
+
 /*
- *
+ * Create HTTP header.
  */
 const std::string HTTP::getBody()
 {
@@ -126,6 +127,12 @@ const std::string HTTP::getBody()
         s_header += this->getContentLengthString();
     s_header += this->getConnectionStatusString();
     s_header += this->getSOAPActionString();
+    
+    if(!m_addonVector.empty())
+    {
+        for(int i = 0; i < m_addonVector.size(); i++)
+            s_header += (*m_addonVector[i]);
+    }
     
     
     s_header += "\n";
@@ -205,11 +212,14 @@ const std::string HTTP::getHttpMessage()
 }
 
 /*
- *
+ * Add a HTTP parameter, which is uses in creating header.
+ * 
+ * @param param     parameter is pointer to a std::string object
  */
-//void HTTP::addAddon(HTTP_addon<std::string, int> *addon)
-//{
-//}
+void HTTP::addHttpParam(httpParam *param)
+{
+    m_addonVector.push_back(param);
+}
 
 
 //////////////////////////////////////
