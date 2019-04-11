@@ -11,8 +11,6 @@
 #include <sstream>
 #include <cstdlib>
 
-#include "../Crypto/base64.hpp"
-
 using namespace WSDL;
 
 //  Methods
@@ -127,7 +125,6 @@ const std::string HTTP::getBody()
     if(this->e_encoding == length)
         s_header += this->getContentLengthString();
     s_header += this->getConnectionStatusString();
-    s_header += this->getBasicAuth();
     s_header += this->getSOAPActionString();
     
     
@@ -213,18 +210,6 @@ const std::string HTTP::getHttpMessage()
 //void HTTP::addAddon(HTTP_addon<std::string, int> *addon)
 //{
 //}
-
-
-/*
- * 
- */
-void HTTP::authBasic(std::string user, std::string password)
-{
-    this->s_basicAuth = user;
-    this->s_basicAuth += ":";
-    this->s_basicAuth += password;
-    base64Encode(s_basicAuth, &s_basicAuth);
-}
 
 
 //////////////////////////////////////

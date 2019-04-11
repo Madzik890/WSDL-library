@@ -5,10 +5,6 @@
       <itemPath>src/client.cpp</itemPath>
       <itemPath>src/client.hpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f3" displayName="Cryptography" projectFiles="true">
-      <itemPath>src/Crypto/base64.cpp</itemPath>
-      <itemPath>src/Crypto/base64.hpp</itemPath>
-    </logicalFolder>
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
@@ -30,7 +26,7 @@
       </logicalFolder>
       <itemPath>src/Message.hpp</itemPath>
     </logicalFolder>
-    <logicalFolder name="f6" displayName="pugixml" projectFiles="true">
+    <logicalFolder name="pugixml" displayName="pugixml" projectFiles="true">
       <itemPath>src/pugixml/foreach.hpp</itemPath>
       <itemPath>src/pugixml/pugiconfig.hpp</itemPath>
       <itemPath>src/pugixml/pugixml.cpp</itemPath>
@@ -54,6 +50,9 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>src/pugixml</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="3">
@@ -97,10 +96,6 @@
           <commandLine>-lcrypto -lssl</commandLine>
         </linkerTool>
       </folder>
-      <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
@@ -183,10 +178,6 @@
           <commandLine>-lcrypto -lssl</commandLine>
         </linkerTool>
       </folder>
-      <item path="src/Crypto/base64.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/Crypto/base64.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/Definitions.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">

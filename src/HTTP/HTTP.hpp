@@ -87,7 +87,6 @@ namespace WSDL
         const std::string getHttpMessage();
         
         //void addAddon(HTTP_addon<std::string, int> *addon);
-        void authBasic(std::string user, std::string password);
         
     protected:
         void removeAddons();//removes 

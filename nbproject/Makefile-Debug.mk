@@ -35,7 +35,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/src/Crypto/base64.o \
 	${OBJECTDIR}/src/HTTP/HTTP.o \
 	${OBJECTDIR}/src/Request.o \
 	${OBJECTDIR}/src/Response.o \
@@ -79,11 +78,6 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a: ${OBJECTFILES}
 	${AR} -rv ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a ${OBJECTFILES} 
 	$(RANLIB) ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a
 
-${OBJECTDIR}/src/Crypto/base64.o: src/Crypto/base64.cpp
-	${MKDIR} -p ${OBJECTDIR}/src/Crypto
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Crypto/base64.o src/Crypto/base64.cpp
-
 ${OBJECTDIR}/src/HTTP/HTTP.o: src/HTTP/HTTP.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/HTTP
 	${RM} "$@.d"
@@ -126,19 +120,6 @@ ${TESTDIR}/tests/Base64Test.o: tests/Base64Test.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -Iinclude -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Base64Test.o tests/Base64Test.cpp
 
-
-${OBJECTDIR}/src/Crypto/base64_nomain.o: ${OBJECTDIR}/src/Crypto/base64.o src/Crypto/base64.cpp 
-	${MKDIR} -p ${OBJECTDIR}/src/Crypto
-	@NMOUTPUT=`${NM} ${OBJECTDIR}/src/Crypto/base64.o`; \
-	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
-	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
-	then  \
-	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Crypto/base64_nomain.o src/Crypto/base64.cpp;\
-	else  \
-	    ${CP} ${OBJECTDIR}/src/Crypto/base64.o ${OBJECTDIR}/src/Crypto/base64_nomain.o;\
-	fi
 
 ${OBJECTDIR}/src/HTTP/HTTP_nomain.o: ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/HTTP
