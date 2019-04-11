@@ -32,6 +32,9 @@ namespace WSDL
     {
     private:
         struct sockaddr_in m_service;
+        struct timeval tv_sendTime;
+        struct timeval tv_recvTime;
+
         int m_socket;
        
     public:
@@ -45,6 +48,9 @@ namespace WSDL
         
         bool setKeepAliveConnection();
         bool setKeepIdleConnection();
+        
+        void setSendTimeout(const __time_t seconds);
+        void setRecvTimeout(const __time_t seconds);
         
         virtual int init();
         virtual int sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponde, Response *response);

@@ -9,6 +9,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <netinet/tcp.h>
+#include <fcntl.h>
 
 #include "Definitions.hpp"
 
@@ -22,6 +23,7 @@ using namespace WSDL;
  * Default constructor
  */
 client::client()
+:tv_sendTime(), tv_recvTime()
 {
 }
 
@@ -119,6 +121,32 @@ bool client::setKeepIdleConnection()
       return true;
 }
   
+
+/*
+ * Set sending timeout.
+ * 
+ * @param seconds   timeout called in seconds
+ */
+void client::setSendTimeout(const __time_t seconds)
+{
+    //struct timeval tv;
+    tv_sendTime.tv_sec = seconds;     /* Timeout in seconds */
+    setsockopt(m_socket, SOL_SOCKET, SO_SNDTIMEO, (struct timeval*)&tv_sendTime,sizeof(tv_sendTime));
+
+}
+
+
+/*
+ * Set receiving timeout.
+ * 
+ * @param seconds   timeout called in seconds
+ */
+void client::setRecvTimeout(const __time_t seconds)
+{    
+    tv_recvTime.tv_sec = seconds;       /* Timeout in seconds */
+    setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (struct timeval*)&tv_recvTime,sizeof(tv_recvTime));
+}
+
 
 /*
  *  Try enable, and reserve socket to selected IP, and port.

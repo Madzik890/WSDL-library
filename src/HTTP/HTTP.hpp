@@ -34,23 +34,10 @@ enum httpConnectionType
 {
 };
 
+typedef std::string httpParam;
+
 namespace WSDL
 {
-    /*
-     * Used in HTTP header, it could be used to 
-     * add additional option to header.
-     */
-    template<class Variable>
-    struct HTTP_addon
-    {
-    public:
-        
-        virtual std::string getAddon(std::string param, Variable variable)
-        {
-            return "";
-        }
-    };
-    
     /*
      * Creates the HTTP header, added in top of WSDL request.
      * List with the HTTP_addon is used to add new HTTP options, 
@@ -60,7 +47,7 @@ namespace WSDL
     {
     private:
         const char *s_userAgent;
-        //std::list<HTTP_addon*>m_addonList;
+        std::list<httpParam>m_addonList;
         
     public:
         HTTP();
@@ -85,8 +72,7 @@ namespace WSDL
         
         const int getHttpCode();
         const std::string getHttpMessage();
-        
-        //void addAddon(HTTP_addon<std::string, int> *addon);
+       
         
     protected:
         void removeAddons();//removes 
