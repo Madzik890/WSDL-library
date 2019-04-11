@@ -24,7 +24,8 @@ Response::Response(std::string *s_body)
 :p_body(s_body), m_xml(NULL)
 {
     m_xml = new xml_document;
-    pugi::xml_parse_result result = m_xml->load_buffer(p_body->c_str(), p_body->size());
+    //pugi::xml_parse_result result = m_xml->load_buffer(p_body->c_str(), p_body->size());
+    m_xml->load_buffer(p_body->c_str(), p_body->size());
 }
 
 

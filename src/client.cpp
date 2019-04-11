@@ -41,54 +41,72 @@ client::~client()
 /*
  *
  */
-void client::setIP(std::string ip)
+void client::setIP(const char *ip)
 {
-    this->endpoint = ip;
+    //this->endpoint = ip;
 
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
     m_service.sin_port = htons( 80 ); // default port to connect HTTP
+    
+    inet_pton( m_service.sin_family, ip, & m_service.sin_addr ); 
 }
 
 
 /*
  * 
  */
-void client::setIPbyDNS(std::string ip)
+bool client::setIPbyDNS(const char *ip)
 {
     //this->endpoint = getIpByName(ip.c_str());
-    this->endpoint = ip;
+    m_hostEnt=gethostbyname(ip);
+    if (m_hostEnt == NULL) 
+    {  
+        /* get the host info */
+        herror("gethostbyname");
+        //exit(1);
+        return false;
+    }
+    //this->endpoint = ip;
 
     m_service.sin_family = AF_INET;
-    m_service.sin_addr.s_addr = INADDR_ANY;
+    m_service.sin_addr = *(struct in_addr *)m_hostEnt->h_addr_list;
+    printf("IP: %s  %s \n", m_hostEnt->h_aliases[0], m_hostEnt->h_name);
     m_service.sin_port = htons( 80 ); // default port to connect HTTP
+    bzero(&(m_service.sin_zero), 8);     /* zero the rest of the struct */
+    
+    return true;
 }
 
 
 /*
  *
  */
-void client::setIP(std::string ip, unsigned int port)
+void client::setIP(const char *ip, const unsigned int port)
 {
-    this->endpoint = ip;
+    //this->endpoint = ip;
     
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
     m_service.sin_port = htons( port );
+    
+    inet_pton( m_service.sin_family, ip, & m_service.sin_addr ); 
 }
    
 
 /*
  * 
  */
-void client::setIPbyDNS(std::string ip, unsigned int port)
+bool client::setIPbyDNS(const char *ip, unsigned int port)
 {
     //this->endpoint = getIpByName(ip.c_str());
-    this->endpoint = ip;
+    //this->endpoint = ip;
 
     m_service.sin_family = AF_INET;
-    m_service.sin_addr.s_addr = INADDR_ANY;
+    //m_service.sin_addr = *((struct in_addr *)he->h_addr);
     m_service.sin_port = htons( port ); // default port to connect HTTP
+    
+    return true;
 }
 
 
@@ -156,7 +174,6 @@ void client::setRecvTimeout(const __time_t seconds)
  */
 int client::init()
 {
-    inet_pton( m_service.sin_family, endpoint.c_str(), & m_service.sin_addr ); 
     m_socket = socket( m_service.sin_family, SOCK_STREAM, 0 );
     
     if(m_socket != -1)

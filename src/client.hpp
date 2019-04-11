@@ -23,7 +23,7 @@
 #include "Request.hpp"
 #include "Response.hpp"
 
-#define CLIENT_MAXRECV_BUFF 4096
+#define CLIENT_MAXRECV_BUFF 65536
 
 namespace WSDL
 {
@@ -34,6 +34,7 @@ namespace WSDL
         struct sockaddr_in m_service;
         struct timeval tv_sendTime;
         struct timeval tv_recvTime;
+        struct hostent * m_hostEnt;
 
         int m_socket;
        
@@ -41,10 +42,10 @@ namespace WSDL
         client();
         ~client();
         
-        void setIP(std::string ip);
-        void setIPbyDNS(std::string ip);
-        void setIP(std::string ip, unsigned int port);
-        void setIPbyDNS(std::string ip, unsigned int port);
+        void setIP(const char *ip);
+        bool setIPbyDNS(const char *ip);
+        void setIP(const char *ip, const unsigned int port);
+        bool setIPbyDNS(const char *ip, unsigned int port);
         
         bool setKeepAliveConnection();
         bool setKeepIdleConnection();
@@ -55,10 +56,7 @@ namespace WSDL
         virtual int init();
         virtual int sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponde, Response *response);
         
-        virtual int * getSocket();
-    protected:
-        std::string endpoint;
-        
+        virtual int * getSocket();    
     };
 
 }
