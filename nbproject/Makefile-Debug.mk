@@ -81,27 +81,27 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwsdl-library.a: ${OBJECTFILES}
 ${OBJECTDIR}/src/HTTP/HTTP.o: src/HTTP/HTTP.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/HTTP
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.cpp
 
 ${OBJECTDIR}/src/Request.o: src/Request.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Request.o src/Request.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Request.o src/Request.cpp
 
 ${OBJECTDIR}/src/Response.o: src/Response.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Response.o src/Response.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Response.o src/Response.cpp
 
 ${OBJECTDIR}/src/client.o: src/client.cpp
 	${MKDIR} -p ${OBJECTDIR}/src
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/client.o src/client.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/client.o src/client.cpp
 
 ${OBJECTDIR}/src/pugixml/pugixml.o: src/pugixml/pugixml.cpp
 	${MKDIR} -p ${OBJECTDIR}/src/pugixml
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/pugixml/pugixml.o src/pugixml/pugixml.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/pugixml/pugixml.o src/pugixml/pugixml.cpp
 
 # Subprojects
 .build-subprojects:
@@ -118,7 +118,7 @@ ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/Base64Test.o ${OBJECTFILES:%.o=%_nomai
 ${TESTDIR}/tests/Base64Test.o: tests/Base64Test.cpp 
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -Iinclude -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Base64Test.o tests/Base64Test.cpp
+	$(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -Iinclude -std=c++98 -MMD -MP -MF "$@.d" -o ${TESTDIR}/tests/Base64Test.o tests/Base64Test.cpp
 
 
 ${OBJECTDIR}/src/HTTP/HTTP_nomain.o: ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.cpp 
@@ -129,7 +129,7 @@ ${OBJECTDIR}/src/HTTP/HTTP_nomain.o: ${OBJECTDIR}/src/HTTP/HTTP.o src/HTTP/HTTP.
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/HTTP/HTTP_nomain.o src/HTTP/HTTP.cpp;\
+	    $(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/HTTP/HTTP_nomain.o src/HTTP/HTTP.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/HTTP/HTTP.o ${OBJECTDIR}/src/HTTP/HTTP_nomain.o;\
 	fi
@@ -142,7 +142,7 @@ ${OBJECTDIR}/src/Request_nomain.o: ${OBJECTDIR}/src/Request.o src/Request.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Request_nomain.o src/Request.cpp;\
+	    $(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Request_nomain.o src/Request.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/Request.o ${OBJECTDIR}/src/Request_nomain.o;\
 	fi
@@ -155,7 +155,7 @@ ${OBJECTDIR}/src/Response_nomain.o: ${OBJECTDIR}/src/Response.o src/Response.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Response_nomain.o src/Response.cpp;\
+	    $(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/Response_nomain.o src/Response.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/Response.o ${OBJECTDIR}/src/Response_nomain.o;\
 	fi
@@ -168,7 +168,7 @@ ${OBJECTDIR}/src/client_nomain.o: ${OBJECTDIR}/src/client.o src/client.cpp
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/client_nomain.o src/client.cpp;\
+	    $(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/client_nomain.o src/client.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/client.o ${OBJECTDIR}/src/client_nomain.o;\
 	fi
@@ -181,7 +181,7 @@ ${OBJECTDIR}/src/pugixml/pugixml_nomain.o: ${OBJECTDIR}/src/pugixml/pugixml.o sr
 	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
 	then  \
 	    ${RM} "$@.d";\
-	    $(COMPILE.cc) -g -Iinclude -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/pugixml/pugixml_nomain.o src/pugixml/pugixml.cpp;\
+	    $(COMPILE.cc) -g -Iinclude -Iinclude/wsdl-library -std=c++98 -Dmain=__nomain -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/src/pugixml/pugixml_nomain.o src/pugixml/pugixml.cpp;\
 	else  \
 	    ${CP} ${OBJECTDIR}/src/pugixml/pugixml.o ${OBJECTDIR}/src/pugixml/pugixml_nomain.o;\
 	fi
