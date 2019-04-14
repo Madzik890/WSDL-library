@@ -6,7 +6,7 @@
  * give a problem with memory, while using a lot of connections.
  */
 
-#include "HTTP.hpp"
+#include "HTTP/HTTP.hpp"
 #include <cstdio>
 #include <sstream>
 #include <cstdlib>
