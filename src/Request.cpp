@@ -7,6 +7,22 @@
 
 using namespace WSDL;
 
+template <typename I> 
+std::string Request::n2hexstr(I w, size_t hex_len) 
+{
+    static const char* digits = "0123456789ABCDEF";
+    std::string rc(hex_len,'0');
+    for (size_t i=0, j=(hex_len-1)*4 ; i<hex_len; ++i,j-=4)
+        rc[i] = digits[(w>>j) & 0x0f];
+    return rc;
+}
+
+
+Request::Request()
+:b_chunked(false)
+{   
+}
+
 /*
  * Return the request body.
  * 
@@ -15,7 +31,20 @@ using namespace WSDL;
 const std::string Request::getBody()
 { 
     std::stringstream result;
-    m_xml.save(result);
+    if(b_chunked)
+    {
+        m_xml.save(result);
+        std::string xml = result.str();
+        result.str("");
+        result.clear();
+        
+        result << n2hexstr<int>(xml.size() - 1) + "\n";
+        result << xml;
+        result << "0\n\n";
+    }
+    else
+        m_xml.save(result);
+    
     return result.str();
 }
 
@@ -101,6 +130,22 @@ void Request::addRequestParam(const char* param, const Argc argc)
 }
 
 
+/*
+ * 
+ */
+void Request::setChunked(bool chunked)
+{
+    this->b_chunked = chunked;
+}
+
+/*
+ * 
+ */
+bool Request::isChunked()
+{
+    return b_chunked;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template void Request::addRequestParam<size_t>(const char*,size_t); // instantiates addRequestParam<size_t>(size_t)
 template void Request::addRequestParam<int>(const char*,int); // instantiates addRequestParam<int>(int)
 template void Request::addRequestParam<double>(const char*,double); // instantiates addRequestParam<double>(double)

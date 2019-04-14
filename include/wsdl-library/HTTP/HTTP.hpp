@@ -12,17 +12,20 @@
 #include <string>
 #include <vector>
 
+
 enum httpVersion
 {
     HTTP1_1 = 0x11,
     HTTP1_2 = 0x12
 };
-    
+  
+
 enum httpMethod
 {
     GET = 0x1,
     POST = 0x2
 };
+
 
 enum httpDataEncoding
 {
@@ -30,10 +33,11 @@ enum httpDataEncoding
     chunked = 0x102
 };
 
+
 enum httpConnectionType
 {
-    close,
-    keep_alive
+    close = 0x201,
+    keep_alive = 202
 };
 
 typedef char* httpParam;
@@ -62,6 +66,7 @@ namespace WSDL
         void setSOAPAction(const std::string action);
         void addContentType(const std::string);
         void setConnectionType(httpConnectionType type);
+        void setEncodingType(httpDataEncoding encoding);
         
         virtual const std::string getBody();//returns finished header
         

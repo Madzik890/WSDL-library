@@ -122,6 +122,15 @@ void HTTP::setConnectionType(httpConnectionType type)
 
 
 /*
+ * 
+ */
+void HTTP::setEncodingType(httpDataEncoding encoding)
+{
+    this->e_encoding = encoding;
+}
+
+
+/*
  * Create HTTP header.
  */
 const std::string HTTP::getBody()
@@ -132,8 +141,7 @@ const std::string HTTP::getBody()
     s_header += this->getHostString();
     s_header += this->getUserAgentString();
     s_header += this->getContentTypeString();
-    if(this->e_encoding == length)
-        s_header += this->getContentLengthString();
+    s_header += this->getContentLengthString();
     s_header += this->getConnectionTypeString();
     s_header += this->getSOAPActionString();
     
@@ -328,12 +336,17 @@ const std::string HTTP::getUserAgentString()
 const std::string HTTP::getContentLengthString()
 {
     std::string s_result;
-    s_result = "Content-Length: ";
+    if(e_encoding == length)
+    {
+        s_result = "Content-Length: ";
     
-    std::stringstream ss;
-    ss << this->u_contentLenght;
-    s_result += ss.str();
-    s_result += "\n";
+        std::stringstream ss;
+        ss << this->u_contentLenght;
+        s_result += ss.str();
+        s_result += "\n";
+    }
+    else
+        s_result = "Transfer-Encoding: chunked \n";
     
     return s_result;
 }
