@@ -23,7 +23,7 @@ using namespace WSDL;
  * Default constructor
  */
 client::client()
-:tv_sendTime(), tv_recvTime()
+:tv_sendTime(), tv_recvTime(), s_endpoint(NULL)
 {
 }
 
@@ -43,7 +43,12 @@ client::~client()
  */
 void client::setIP(const char *ip)
 {
-    this->endpoint = ip;
+    if(s_endpoint != NULL)
+        delete[] s_endpoint;
+        
+    size_t ipLength = strlen(ip);
+    s_endpoint = new char[ipLength];
+    strcpy(s_endpoint, ip);
 
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
@@ -56,11 +61,21 @@ void client::setIP(const char *ip)
  */
 void client::setIPbyDNS(const char *ip)
 {
-    this->endpoint = getIpByName(ip);
-
-    m_service.sin_family = AF_INET;
-    m_service.sin_addr.s_addr = INADDR_ANY;
-    m_service.sin_port = htons( 80 ); // default port to connect HTTP
+    const char *dnsIp = getIpByName(ip);
+    
+    if(dnsIp != NULL)
+    {
+        if(s_endpoint != NULL)
+            delete[] s_endpoint;
+    
+        size_t ipLength = strlen(dnsIp);
+        s_endpoint = new char[ipLength];
+        strcpy(s_endpoint, dnsIp);
+    
+        m_service.sin_family = AF_INET;
+        m_service.sin_addr.s_addr = INADDR_ANY;
+        m_service.sin_port = htons( 80 ); // default port to connect HTTP
+    }
 }
 
 
@@ -69,7 +84,12 @@ void client::setIPbyDNS(const char *ip)
  */
 void client::setIP(const char *ip, const unsigned int port)
 {
-    this->endpoint = ip;
+    if(s_endpoint != NULL)
+        delete[] s_endpoint;
+        
+    size_t ipLength = strlen(ip);
+    s_endpoint = new char[ipLength];
+    strcpy(s_endpoint, ip);
     
     m_service.sin_family = AF_INET;
     m_service.sin_addr.s_addr = INADDR_ANY;
@@ -82,11 +102,21 @@ void client::setIP(const char *ip, const unsigned int port)
  */
 void client::setIPbyDNS(const char *ip, const unsigned int port)
 {
-    this->endpoint = getIpByName(ip);
-
-    m_service.sin_family = AF_INET;
-    m_service.sin_addr.s_addr = INADDR_ANY;
-    m_service.sin_port = htons( port ); // default port to connect HTTP
+    const char *dnsIp = getIpByName(ip);
+    
+    if(dnsIp != NULL)
+    {
+        if(s_endpoint != NULL)
+            delete[] s_endpoint;
+        
+        size_t ipLength = strlen(dnsIp);
+        s_endpoint = new char[ipLength];
+        strcpy(s_endpoint, dnsIp);
+    
+        m_service.sin_family = AF_INET;
+        m_service.sin_addr.s_addr = INADDR_ANY;
+        m_service.sin_port = htons( port ); // default port to connect HTTP
+    }
 }
 
 
@@ -103,21 +133,6 @@ bool client::setKeepAliveConnection()
   else
       return true;
 }
-
-
-/*
- * Try enable KeepIdle connection with a server.
- * 
- * @return State of setting KeepIdle operation(true - OK, fail - error)
- */
-bool client::setKeepIdleConnection()
-{
-  int flags = 10;
-  if (setsockopt(m_socket, SOL_SOCKET, TCP_KEEPIDLE, (void *)&flags, sizeof(flags))) 
-      return false;
-  else
-      return true;
-}
   
 
 /*
@@ -125,11 +140,10 @@ bool client::setKeepIdleConnection()
  * 
  * @param seconds   timeout called in seconds
  */
-void client::setSendTimeout(const __time_t seconds)
+int client::setSendTimeout(const __time_t seconds)
 {
     tv_sendTime.tv_sec = seconds;     /* Timeout in seconds */
-    setsockopt(m_socket, SOL_SOCKET, SO_SNDTIMEO, (struct timeval*)&tv_sendTime,sizeof(tv_sendTime));
-
+    return setsockopt(m_socket, SOL_SOCKET, SO_SNDTIMEO, (struct timeval*)&tv_sendTime,sizeof(tv_sendTime));
 }
 
 
@@ -138,10 +152,21 @@ void client::setSendTimeout(const __time_t seconds)
  * 
  * @param seconds   timeout called in seconds
  */
-void client::setRecvTimeout(const __time_t seconds)
-{    
+int client::setRecvTimeout(const __time_t seconds)
+{
     tv_recvTime.tv_sec = seconds;       /* Timeout in seconds */
-    setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (struct timeval*)&tv_recvTime,sizeof(tv_recvTime));
+    return setsockopt(m_socket, SOL_SOCKET, SO_RCVTIMEO, (struct timeval*)&tv_recvTime,sizeof(tv_recvTime));
+}
+
+
+/*
+ * Set max time of keep alive timeout.
+ * 
+ * @param seconds   timeout called in seconds
+ */
+int client::setKeepAliveTimeout(const __time_t seconds) 
+{
+    return setsockopt(m_socket, IPPROTO_TCP, TCP_KEEPCNT, (__time_t*)&seconds, sizeof(seconds)); 
 }
 
 
@@ -152,9 +177,14 @@ void client::setRecvTimeout(const __time_t seconds)
  *  @return State of whole operation
  */
 int client::init()
-{
-    inet_pton( m_service.sin_family, endpoint.c_str(), & m_service.sin_addr ); 
-    m_socket = socket( m_service.sin_family, SOCK_STREAM, 0 );
+{   
+    if(s_endpoint != NULL)
+    {
+        inet_pton( m_service.sin_family, s_endpoint, & m_service.sin_addr ); 
+        m_socket = socket( m_service.sin_family, SOCK_STREAM, 0 );
+    }
+    else
+        return WSDL_IPNULL_ERROR;
     
     if(m_socket != -1)
         return WSDL_OK;
@@ -201,6 +231,9 @@ void copyString(char * string, const char * copy, size_t size)
  */
 int client::sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponse, Response *response)
 {
+    if(this->s_endpoint == NULL)
+        return WSDL_IPNULL_ERROR;
+        
     int error;
     char *s_buffer = NULL;
     size_t i_requestSize = 0;
@@ -267,6 +300,18 @@ int client::sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponse,
 
 
 /*
+ * Clear all allocated objects from memory.
+ */
+void client::close()
+{
+    shutdown( m_socket, SHUT_RDWR );
+    
+    if(s_endpoint != NULL)
+        delete[] s_endpoint;
+}
+
+
+/*
  * Return pointer to the client socket.
  * 
  * @return Pointer to the client socket.
@@ -288,6 +333,7 @@ const char *client::getIpByName(const char *hostName)
     if(( he = gethostbyname( hostName ) ) == NULL )
         return NULL;
     
-    const char * ipAddress = inet_ntoa( **( struct in_addr ** ) he->h_addr_list );
+    const char * ipAddress;
+    ipAddress = inet_ntoa( **( struct in_addr ** ) he->h_addr_list );
     return ipAddress;
 }

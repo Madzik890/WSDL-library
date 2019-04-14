@@ -47,17 +47,18 @@ namespace WSDL
         void setIPbyDNS(const char *ip, const unsigned int port);
         
         bool setKeepAliveConnection();
-        bool setKeepIdleConnection();
         
-        void setSendTimeout(const __time_t seconds);
-        void setRecvTimeout(const __time_t seconds);
+        int setSendTimeout(const __time_t seconds);
+        int setRecvTimeout(const __time_t seconds);
+        int setKeepAliveTimeout(const __time_t seconds);
         
         virtual int init();
         virtual int sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponde, Response *response);
+        virtual void close();
         
         virtual int * getSocket();
     protected:
-        std::string endpoint;
+        char * s_endpoint;
         
         const char * getIpByName( const char * hostName );
     };
