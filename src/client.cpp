@@ -47,7 +47,7 @@ void client::setIP(const char *ip)
         delete[] s_endpoint;
         
     size_t ipLength = strlen(ip);
-    s_endpoint = new char[ipLength];
+    s_endpoint = new char[ipLength + 1];
     strcpy(s_endpoint, ip);
 
     m_service.sin_family = AF_INET;
@@ -69,7 +69,7 @@ void client::setIPbyDNS(const char *ip)
             delete[] s_endpoint;
     
         size_t ipLength = strlen(dnsIp);
-        s_endpoint = new char[ipLength];
+        s_endpoint = new char[ipLength + 1];
         strcpy(s_endpoint, dnsIp);
     
         m_service.sin_family = AF_INET;
@@ -88,7 +88,7 @@ void client::setIP(const char *ip, const unsigned int port)
         delete[] s_endpoint;
         
     size_t ipLength = strlen(ip);
-    s_endpoint = new char[ipLength];
+    s_endpoint = new char[ipLength + 1];
     strcpy(s_endpoint, ip);
     
     m_service.sin_family = AF_INET;
@@ -110,7 +110,7 @@ void client::setIPbyDNS(const char *ip, const unsigned int port)
             delete[] s_endpoint;
         
         size_t ipLength = strlen(dnsIp);
-        s_endpoint = new char[ipLength];
+        s_endpoint = new char[ipLength + 1];
         strcpy(s_endpoint, dnsIp);
     
         m_service.sin_family = AF_INET;
