@@ -346,7 +346,7 @@ const std::string HTTP::getContentLengthString()
         s_result += "\n";
     }
     else
-        s_result = "Transfer-Encoding: chunked \n";
+        s_result = "Transfer-Encoding: chunked\n";
     
     return s_result;
 }
@@ -355,20 +355,22 @@ const std::string HTTP::getContentLengthString()
 const std::string HTTP::getConnectionTypeString()
 {
     std::string s_result;
-    s_result = "Connection: ";
     
     switch(e_connection)
     {
         case close:
-            s_result += "close";
+            s_result = "Connection: close\n";
             break;
         
         case keep_alive:
-            s_result += "keep-alive";
+            s_result = "Connection: keep-alive\n";
+            break;
+           
+        default:
+            s_result = "Connection: close\n";
             break;
     }
-    
-    s_result += "\n";
+   
     return s_result;
 }
 
@@ -430,8 +432,8 @@ void HTTP::analizeHeader()
         analizeAddonParam(line);
         
       
-        size_t m =   this->p_recBuffer->find(line);
-        size_t n =   this->p_recBuffer->find_first_of("\n", m + line.length());
+        size_t m = this->p_recBuffer->find(line);
+        size_t n = this->p_recBuffer->find_first_of("\n", m + line.length());
           this->p_recBuffer->erase(m, n - m + 1);
         //s_buffer.erase(firstNL, secondNL - firstNL + 1);
     }

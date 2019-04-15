@@ -19,7 +19,7 @@ std::string Request::n2hexstr(I w, size_t hex_len)
 
 
 Request::Request()
-:b_chunked(false)
+:b_chunked(false),u_flags(pugi::format_default)
 {   
 }
 
@@ -33,18 +33,19 @@ const std::string Request::getBody()
     std::stringstream result;
     if(b_chunked)
     {
-        m_xml.save(result);
+        m_xml.save(result, PUGIXML_TEXT("\t"), u_flags);
         std::string xml = result.str();
         result.str("");
         result.clear();
         
-        result << n2hexstr<int>(xml.size() - 1) + "\n";
+        result << n2hexstr<int>(xml.size()) + "\n";
         result << xml;
-        result << "0\n\n";
+        result << "\n0\n\n";
     }
     else
-        m_xml.save(result);
+        m_xml.save(result, PUGIXML_TEXT("\t"), u_flags);
     
+    // m_xml.save(result, indent, flags, encoding);
     return result.str();
 }
 
@@ -138,12 +139,31 @@ void Request::setChunked(bool chunked)
     this->b_chunked = chunked;
 }
 
+
 /*
  * 
  */
-bool Request::isChunked()
+void Request::setXmlFlag(const unsigned int flags)
+{
+    this->u_flags = flags;
+}
+
+
+/*
+ * 
+ */
+const bool Request::isChunked()
 {
     return b_chunked;
+}
+
+
+/*
+ * 
+ */
+const unsigned int Request::getXmlFlags()
+{
+    return u_flags;
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 template void Request::addRequestParam<size_t>(const char*,size_t); // instantiates addRequestParam<size_t>(size_t)

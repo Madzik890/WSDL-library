@@ -36,8 +36,10 @@ namespace WSDL
         template<class Argc>
         void addRequestParam(const char* param, Argc argc);
         void setChunked(bool chunked);
+        void setXmlFlag(const unsigned int flags);
         
-        bool isChunked();
+        const bool isChunked();
+        const unsigned int getXmlFlags();
     protected:
         bool b_chunked;
         
@@ -45,6 +47,7 @@ namespace WSDL
         xml_node m_root;
         xml_node m_body;
         xml_node m_request;
+        unsigned int u_flags;
     };
 }
 

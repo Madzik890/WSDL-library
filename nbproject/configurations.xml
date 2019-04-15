@@ -28,10 +28,10 @@
       <itemPath>include/wsdl-library/Message.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="pugixml" displayName="pugixml" projectFiles="true">
-      <itemPath>src/pugixml/foreach.hpp</itemPath>
-      <itemPath>src/pugixml/pugiconfig.hpp</itemPath>
+      <itemPath>include/wsdl-library/pugixml/foreach.hpp</itemPath>
+      <itemPath>include/wsdl-library/pugixml/pugiconfig.hpp</itemPath>
       <itemPath>src/pugixml/pugixml.cpp</itemPath>
-      <itemPath>src/pugixml/pugixml.hpp</itemPath>
+      <itemPath>include/wsdl-library/pugixml/pugixml.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -118,6 +118,21 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="include/wsdl-library/pugixml/foreach.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/wsdl-library/pugixml/pugiconfig.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/wsdl-library/pugixml/pugixml.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Request.cpp" ex="false" tool="1" flavor2="0">
@@ -128,13 +143,7 @@
       </item>
       <item path="src/namespaces.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/pugixml/foreach.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/pugixml/pugiconfig.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/pugixml/pugixml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/pugixml/pugixml.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/Base64Test.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -209,6 +218,21 @@
             tool="3"
             flavor2="0">
       </item>
+      <item path="include/wsdl-library/pugixml/foreach.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/wsdl-library/pugixml/pugiconfig.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="include/wsdl-library/pugixml/pugixml.hpp"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="src/HTTP/HTTP.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="src/Request.cpp" ex="false" tool="1" flavor2="0">
@@ -219,13 +243,7 @@
       </item>
       <item path="src/namespaces.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="src/pugixml/foreach.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="src/pugixml/pugiconfig.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="src/pugixml/pugixml.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="src/pugixml/pugixml.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="tests/Base64Test.cpp" ex="false" tool="1" flavor2="0">
       </item>

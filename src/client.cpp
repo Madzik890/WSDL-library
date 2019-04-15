@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <netinet/tcp.h>
 #include <fcntl.h>
+#include <stdint.h>
 
 #include "Definitions.hpp"
 
@@ -109,7 +110,7 @@ void client::setIPbyDNS(const char *ip, const unsigned int port)
         if(s_endpoint != NULL)
             delete[] s_endpoint;
         
-        size_t ipLength = strlen(dnsIp);
+        const int_fast64_t ipLength = static_cast<int_fast64_t>(strlen(dnsIp));
         s_endpoint = new char[ipLength + 1];
         strcpy(s_endpoint, dnsIp);
     
@@ -207,10 +208,10 @@ int client::init()
  */
 void copyString(char * string, const char * copy, size_t size)
 {
-    size_t firstPos = std::strlen(string);
+    const uint_fast64_t firstPos = static_cast<uint_fast64_t>(std::strlen(string));
     
     for(int i = firstPos; i < size; i++)
-        string[i] = copy[i - firstPos];
+        string[i] = (char)copy[i - firstPos];
 }
 
 
@@ -236,24 +237,24 @@ int client::sendRequest(HTTP *httpRequest, Request *request, HTTP *httpResponse,
         
     int error;
     char *s_buffer = NULL;
-    size_t i_requestSize = 0;
+    uint_fast64_t i_requestSize = 0;
     
     if(httpRequest != NULL)
     {
-        i_requestSize = httpRequest->getBody().size();
+        i_requestSize = static_cast<uint_fast64_t>(httpRequest->getBody().size());
         
         s_buffer = (char*) malloc(sizeof(char) * i_requestSize);
         std::memcpy(s_buffer, httpRequest->getBody().c_str(), i_requestSize);
     }
     if(request != NULL)
     {
-        i_requestSize += request->getBody().size();
-        s_buffer = (char*) realloc (s_buffer, i_requestSize);
+        i_requestSize += static_cast<uint_fast64_t>(request->getBody().size());
+        s_buffer = (char*) realloc (s_buffer,sizeof(char) * i_requestSize);
         
         copyString(s_buffer, request->getBody().c_str(), i_requestSize);
     }
 
-    
+   
     error = connect( m_socket,( struct sockaddr * ) & this->m_service, sizeof( this->m_service ) );
     if(error == -1)
     {
