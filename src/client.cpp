@@ -42,47 +42,6 @@ client::~client()
 /*
  *
  */
-void client::setIP(const char *ip)
-{
-    if(s_endpoint != NULL)
-        delete[] s_endpoint;
-        
-    size_t ipLength = strlen(ip);
-    s_endpoint = new char[ipLength + 1];
-    strcpy(s_endpoint, ip);
-
-    m_service.sin_family = AF_INET;
-    m_service.sin_addr.s_addr = INADDR_ANY;
-    m_service.sin_port = htons( 80 ); // default port to connect HTTP
-}
-
-
-/*
- * 
- */
-void client::setIPbyDNS(const char *ip)
-{
-    const char *dnsIp = getIpByName(ip);
-    
-    if(dnsIp != NULL)
-    {
-        if(s_endpoint != NULL)
-            delete[] s_endpoint;
-    
-        size_t ipLength = strlen(dnsIp);
-        s_endpoint = new char[ipLength + 1];
-        strcpy(s_endpoint, dnsIp);
-    
-        m_service.sin_family = AF_INET;
-        m_service.sin_addr.s_addr = INADDR_ANY;
-        m_service.sin_port = htons( 80 ); // default port to connect HTTP
-    }
-}
-
-
-/*
- *
- */
 void client::setIP(const char *ip, const unsigned int port)
 {
     if(s_endpoint != NULL)
@@ -128,7 +87,7 @@ void client::setIPbyDNS(const char *ip, const unsigned int port)
  */
 bool client::setKeepAliveConnection()
 {
-  int flags =1;
+  int flags = 1;
   if (setsockopt(m_socket, SOL_SOCKET, SO_KEEPALIVE, (void *)&flags, sizeof(flags))) 
       return false;
   else

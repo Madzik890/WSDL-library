@@ -41,10 +41,8 @@ namespace WSDL
         client();
         ~client();
         
-        void setIP(const char *ip);
-        void setIPbyDNS(const char *ip);
-        void setIP(const char *ip, const unsigned int port);
-        void setIPbyDNS(const char *ip, const unsigned int port);
+        void setIP(const char *ip, const unsigned int port = 80);
+        void setIPbyDNS(const char *ip, const unsigned int port = 80);
         
         bool setKeepAliveConnection();
         
